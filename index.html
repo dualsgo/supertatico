@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>SUPER TÁTICO CAMISA 10 | Ri Happy - DDC 2026</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Montserrat & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+  <!-- JsBarcode CDN (Códigos de Barras de Matrícula CODE128) -->
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  
+  <!-- QRCode.js CDN (Geração Dinâmica de QR Code para Celular) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ri: {
+              orange: '#FF5A00',
+              orangeDark: '#D94A00',
+              orangeLight: '#FFF4ED',
+              yellow: '#FFC700',
+              yellowLight: '#FEF9C3',
+              purple: '#6C2EB9',
+              purpleDark: '#4A1D82',
+              purpleLight: '#F3E8FF',
+              blue: '#0085FF',
+              blueLight: '#EFF6FF',
+              green: '#00B050',
+              greenLight: '#F0FDF4',
+              pink: '#E6007E',
+              pinkLight: '#FDF2F8',
+              slate: '#0F172A'
+            }
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            brand: ['Montserrat', 'Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0B0F19;
+      color: #F8FAFC;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .brand-font {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #334155;
+      border-radius: 9999px;
+    }
+
+    /* ========================================================
+       CONFIGURAÇÕES DE IMPRESSÃO PROFISSIONAL (FOLHA A4 INTEIRA)
+       ======================================================== */
+    @page {
+      size: A4 portrait;
+      margin: 4mm 5mm 4mm 5mm;
+    }
+
+    @media print {
+      html, body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        font-size: 8pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .avoid-break {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      .page-break-always {
+        page-break-before: always !important;
+        break-before: page !important;
+      }
+
+      /* OCULTA SEÇÕES NÃO SELECIONADAS NA IMPRESSÃO */
+      body.print-mode-quadro-a4 .section-cards-individual,
+      body.print-mode-quadro-a4 .section-todos-cards,
+      body.print-mode-quadro-a4 .section-protocolos,
+      body.print-mode-quadro-a4 .section-mural-normal,
+      body.print-mode-quadro-a4 .sheet-crachas-page,
+      body.print-mode-quadro-a4 .sheet-12-crachas-page,
+      body.print-mode-quadro-a4 .sheet-12-crachas-horizontal,
+      body.print-mode-quadro-a4 .sheet-12-crachas-vertical,
+      body.print-mode-quadro-a4 .sheet-12-crachas-frente,
+      body.print-mode-quadro-a4 .section-mobile-collaborator {
+        display: none !important;
+      }
+
+      body.print-mode-quadro-a4 .quadro-a4-full-page {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        height: 98vh !important;
+        max-height: 98vh !important;
+        overflow: hidden !important;
+        page-break-inside: avoid !important;
+      }
+
+      body.print-mode-quadro-a4 table.table-a4-single {
+        font-size: 6.9pt !important;
+        line-height: 1.15 !important;
+        width: 100% !important;
+        border-collapse: collapse !important;
+      }
+
+      body.print-mode-quadro-a4 table.table-a4-single th,
+      body.print-mode-quadro-a4 table.table-a4-single td {
+        padding: 2px 3.5px !important;
+      }
+
+      /* MODO 2: FICHA DO COLABORADOR INDIVIDUAL (A4 RETRATO) */
+      body.print-mode-card-individual .quadro-a4-full-page,
+      body.print-mode-card-individual .section-todos-cards,
+      body.print-mode-card-individual .section-protocolos,
+      body.print-mode-card-individual .section-mural-normal,
+      body.print-mode-card-individual .sheet-crachas-page,
+      body.print-mode-card-individual .sheet-12-crachas-page,
+      body.print-mode-card-individual .sheet-12-crachas-horizontal,
+      body.print-mode-card-individual .sheet-12-crachas-vertical,
+      body.print-mode-card-individual .sheet-12-crachas-frente,
+      body.print-mode-card-individual .section-mobile-collaborator {
+        display: none !important;
+      }
+
+      body.print-mode-card-individual .card-individual-printable {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        page-break-inside: avoid !important;
+      }
+
+      /* MODO 3: FOLHA DE CRACHÁS 3X3 (9 CARDS INDIVIDUAIS POR FOLHA A4 RETRATO) */
+      body.print-mode-9-cards .quadro-a4-full-page,
+      body.print-mode-9-cards .card-individual-printable,
+      body.print-mode-9-cards .section-cards-individual,
+      body.print-mode-9-cards .section-todos-cards,
+      body.print-mode-9-cards .section-protocolos,
+      body.print-mode-9-cards .section-mural-normal,
+      body.print-mode-9-cards .sheet-12-crachas-page,
+      body.print-mode-9-cards .sheet-12-crachas-horizontal,
+      body.print-mode-9-cards .sheet-12-crachas-vertical,
+      body.print-mode-9-cards .sheet-12-crachas-frente,
+      body.print-mode-9-cards .section-mobile-collaborator {
+        display: none !important;
+      }
+
+      body.print-mode-9-cards .sheet-crachas-page {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        grid-template-rows: repeat(3, 1fr) !important;
+        gap: 3mm !important;
+        width: 100% !important;
+        height: 98vh !important;
+        max-height: 98vh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        page-break-inside: avoid !important;
+      }
+
+      body.print-mode-9-cards .cracha-badge {
+        border: 1.5px dashed #475569 !important;
+        border-radius: 8px !important;
+        padding: 6px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        background: #FFFFFF !important;
+        box-sizing: border-box !important;
+        page-break-inside: avoid !important;
+      }
+
+      /* MODO 4: 12 CARDS VERSO - VERTICAL (5,2 x 7,0 cm) */
+      body.print-mode-12-cards-vertical .quadro-a4-full-page,
+      body.print-mode-12-cards-vertical .card-individual-printable,
+      body.print-mode-12-cards-vertical .section-cards-individual,
+      body.print-mode-12-cards-vertical .section-todos-cards,
+      body.print-mode-12-cards-vertical .section-protocolos,
+      body.print-mode-12-cards-vertical .section-mural-normal,
+      body.print-mode-12-cards-vertical .sheet-crachas-page,
+      body.print-mode-12-cards-vertical .sheet-12-crachas-horizontal,
+      body.print-mode-12-cards-vertical .sheet-12-crachas-frente,
+      body.print-mode-12-cards-vertical .section-mobile-collaborator {
+        display: none !important;
+      }
+
+      body.print-mode-12-cards-vertical .sheet-12-crachas-vertical {
+        display: grid !important;
+        grid-template-columns: repeat(3, 51.5mm) !important;
+        grid-template-rows: repeat(4, 70mm) !important;
+        column-gap: 3mm !important;
+        row-gap: 2mm !important;
+        width: 160.5mm !important;
+        max-width: 200mm !important;
+        height: 286mm !important;
+        max-height: 290mm !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        align-content: center !important;
+        box-sizing: border-box !important;
+        page-break-inside: avoid !important;
+      }
+
+      body.print-mode-12-cards-vertical .cracha-vertical-badge {
+        width: 51.5mm !important;
+        max-width: 52mm !important;
+        height: 70mm !important;
+        max-height: 70mm !important;
+        border: 1.5px dashed #000000 !important;
+        border-radius: 4px !important;
+        padding: 3px 4px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-inside: avoid !important;
+      }
+
+      /* MODO 5: 12 CARDS FRENTE (VERTICAL 5,2 x 7,0 cm) COM NOME GRANDE, CÓDIGO DE BARRAS E QR CODE */
+      body.print-mode-12-frente .quadro-a4-full-page,
+      body.print-mode-12-frente .card-individual-printable,
+      body.print-mode-12-frente .section-cards-individual,
+      body.print-mode-12-frente .section-todos-cards,
+      body.print-mode-12-frente .section-protocolos,
+      body.print-mode-12-frente .section-mural-normal,
+      body.print-mode-12-frente .sheet-crachas-page,
+      body.print-mode-12-frente .sheet-12-crachas-horizontal,
+      body.print-mode-12-frente .sheet-12-crachas-vertical,
+      body.print-mode-12-frente .section-mobile-collaborator {
+        display: none !important;
+      }
+
+      body.print-mode-12-frente .sheet-12-crachas-frente {
+        display: grid !important;
+        grid-template-columns: repeat(3, 51.5mm) !important;
+        grid-template-rows: repeat(4, 70mm) !important;
+        column-gap: 3mm !important;
+        row-gap: 2mm !important;
+        width: 160.5mm !important;
+        max-width: 200mm !important;
+        height: 286mm !important;
+        max-height: 290mm !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        align-content: center !important;
+        box-sizing: border-box !important;
+        page-break-inside: avoid !important;
+      }
+
+      body.print-mode-12-frente .cracha-frente-badge {
+        width: 51.5mm !important;
+        max-width: 52mm !important;
+        height: 70mm !important;
+        max-height: 70mm !important;
+        border: 1.5px dashed #000000 !important;
+        border-radius: 4px !important;
+        padding: 2mm !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-inside: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white">
+
+  <div id="app" :class="printBodyClass" class="flex-1 flex flex-col">
+
+    <!-- ================= BARRA SUPERIOR DE MODO GLOBAL (NO-PRINT) ================= -->
+    <header class="no-print bg-slate-900/95 backdrop-blur-md text-white sticky top-0 z-50 border-b border-slate-800 shadow-xl">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
+        
+        <!-- Identidade Visual -->
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 bg-ri-orange text-white rounded-xl flex items-center justify-center font-black text-xl shadow transform -rotate-3 select-none">
+            10
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="bg-amber-400 text-slate-950 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.2 rounded font-brand">
+                DDC 2026
+              </span>
+              <span class="text-slate-400 text-xs hidden sm:inline">• Ri Happy Loja 1187</span>
+            </div>
+            <h1 class="brand-font text-xs sm:text-sm font-black text-white leading-tight">
+              SUPER TÁTICO CAMISA 10
+            </h1>
+          </div>
+        </div>
+
+        <!-- SELETOR PRINCIPAL DE MODO: 📱 VISÃO CELULAR VS 🖨️ CENTRAL DE IMPRESSÃO -->
+        <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded-2xl border border-slate-800 shadow-inner">
+          <button @click="currentMainMode = 'collaborator'" 
+                  :class="currentMainMode === 'collaborator' 
+                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black shadow-md' 
+                          : 'text-slate-400 hover:text-white font-medium'"
+                  class="px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition-all">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            <span class="font-bold">📱 Visão Colaborador</span>
+            <span v-if="selectedCollab" class="hidden md:inline text-[10px] bg-slate-900/30 px-1.5 py-0.2 rounded font-black">
+              {{ selectedCollab.name }}
+            </span>
+          </button>
+
+          <button @click="currentMainMode = 'admin_print'" 
+                  :class="currentMainMode === 'admin_print' 
+                          ? 'bg-slate-800 text-white font-black shadow-md ring-1 ring-slate-700' 
+                          : 'text-slate-400 hover:text-white font-medium'"
+                  class="px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition-all">
+            <i class="fa-solid fa-print text-amber-400"></i>
+            <span class="font-bold">🖨️ Central de Impressão & Gestão</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ========================================================
+         PARTE 1: VISÃO DO COLABORADOR (FOCADA NO CELULAR / MOBILE FIRST)
+         Ativa por padrão ao escanear o QR Code (?colab=Nome)
+         ======================================================== -->
+    <section v-if="currentMainMode === 'collaborator'" class="section-mobile-collaborator flex-1 flex flex-col max-w-lg mx-auto w-full p-3 sm:p-4 space-y-4 pb-24">
+      
+      <!-- BARRA DE SELEÇÃO RÁPIDA DE COLABORADOR (CHIPS DESLIZANTES) -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-2.5 shadow-sm space-y-2">
+        <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+          <span class="flex items-center gap-1.5 font-bold text-amber-400">
+            <i class="fa-solid fa-user-tag"></i> Colaborador Selecionado:
+          </span>
+          <span class="text-[10px] text-slate-500">Toque para trocar</span>
+        </div>
+        <div class="flex items-center gap-1.5 overflow-x-auto custom-scroll pb-1">
+          <button v-for="person in allCollaboratorsList" :key="'chip-' + person.name"
+                  @click="selectCollab(person.name)"
+                  :class="selectedCollabName === person.name 
+                          ? 'bg-ri-orange text-white font-black shadow-md ring-2 ring-amber-300' 
+                          : 'bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold'"
+                  class="px-2.5 py-1 rounded-xl text-xs shrink-0 flex items-center gap-1.5 transition-all">
+            <span class="w-4 h-4 rounded-md flex items-center justify-center text-[9px] font-black text-white"
+                  :class="getAvatarClass(person.name)">
+              {{ person.name.charAt(0) }}
+            </span>
+            <span>{{ person.name }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CARD HERÓI DO COLABORADOR ATIVO -->
+      <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-850 border border-slate-800 rounded-3xl p-4 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-ri-orange/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="flex items-start gap-3.5 relative z-10">
+          <!-- Avatar Grande -->
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center font-black text-2xl text-white shadow-lg shrink-0"
+               :class="getAvatarClass(selectedCollab.name)">
+            {{ selectedCollab.name.charAt(0) }}
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <span class="bg-ri-orange text-white text-[9px] font-black uppercase px-2 py-0.5 rounded tracking-wider">
+                {{ selectedCollab.shift }}
+              </span>
+              <span class="bg-slate-800 text-amber-300 text-[9px] font-bold px-2 py-0.5 rounded border border-slate-700">
+                Matr. {{ selectedCollab.matricula }}
+              </span>
+            </div>
+            <h2 class="brand-font text-lg font-black text-white leading-tight mt-1 truncate">
+              {{ selectedCollab.name.toUpperCase() }}
+            </h2>
+            <p class="text-xs text-slate-300 font-medium truncate mt-0.5">
+              {{ selectedCollab.role }}
+            </p>
+            <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+              <i class="fa-regular fa-clock text-amber-400"></i>
+              <span>{{ selectedCollab.schedule }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diretriz Geral de Missão -->
+        <div class="mt-3.5 pt-3 border-t border-slate-800 text-xs text-slate-300 leading-relaxed bg-slate-950/60 rounded-2xl p-3 border border-slate-800/60">
+          <span class="font-bold text-amber-300 block mb-0.5 flex items-center gap-1">
+            <i class="fa-solid fa-bullseye"></i> Diretriz do Seu Turno:
+          </span>
+          {{ selectedCollab.directive }}
+        </div>
+
+        <!-- Barra de Progresso do Checklist do Turno -->
+        <div class="mt-3 bg-slate-950/80 p-3 rounded-2xl border border-slate-800">
+          <div class="flex items-center justify-between text-xs mb-1.5">
+            <span class="font-bold text-slate-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-check text-emerald-400"></i> Checklist do Turno
+            </span>
+            <span class="font-black text-amber-400">{{ completedCount }} de {{ myTasks.length }} concluídas</span>
+          </div>
+          <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+            <div class="bg-gradient-to-r from-ri-orange to-amber-400 h-full transition-all duration-300 rounded-full"
+                 :style="{ width: progressPercentage + '%' }"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BARRA DE BUSCA RÁPIDA DE PROCEDIMENTOS -->
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+        <input v-model="searchQuery" 
+               type="text" 
+               placeholder="Buscar tarefa, setor ou procedimento (ex: sangria, troca)..." 
+               class="w-full bg-slate-900 border border-slate-800 rounded-2xl pl-9 pr-9 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-ri-orange transition-all">
+        <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- ================= ABA MOBILE 1: MINHAS TAREFAS (COM EXPANDIR COMO FAZER) ================= -->
+      <div v-if="!searchQuery.trim() && mobileSubTab === 'minhas'" class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-ri-orange"></i>
+            Suas Missões no Turno ({{ myTasks.length }})
+          </h3>
+          <span class="text-[10px] text-slate-500">Toque no card para ver detalhes</span>
+        </div>
+
+        <div v-for="t in myTasks" :key="'collab-task-' + t.number" 
+             class="bg-slate-900 border border-slate-800 rounded-2xl p-4 transition-all duration-200 shadow-md"
+             :class="taskCompleted[t.number] ? 'border-emerald-500/50 bg-emerald-950/10' : ''">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded tracking-wider"
+                      :class="getSectorHeaderClass(t.sector)">
+                  #{{ t.number }} • {{ t.sector }}
+                </span>
+                <span class="text-[10px] text-amber-300 bg-amber-400/10 border border-amber-400/20 px-2 py-0.5 rounded-full font-bold">
+                  <i class="fa-regular fa-clock mr-1"></i>{{ t.frequency }}
+                </span>
+              </div>
+              
+              <h4 class="font-black text-sm text-white leading-tight"
+                  :class="taskCompleted[t.number] ? 'line-through text-slate-400' : ''">
+                {{ t.title }}
+              </h4>
+            </div>
+
+            <!-- Checkbox Interativo Grande -->
+            <button @click="toggleTask(t.number)" 
+                    class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border-2 transition-all mt-0.5"
+                    :class="taskCompleted[t.number] 
+                            ? 'bg-emerald-500 border-emerald-400 text-white shadow-lg' 
+                            : 'bg-slate-800 border-slate-700 text-transparent hover:border-slate-500'">
+              <i class="fa-solid fa-check text-sm"></i>
+            </button>
+          </div>
+
+          <!-- Ação Específica -->
+          <div class="mt-3 bg-slate-950/80 rounded-xl p-2.5 border border-slate-800 text-xs">
+            <div class="text-[10px] font-bold text-amber-300 flex items-center gap-1.5 mb-1">
+              <i class="fa-solid fa-user-gear"></i> Sua Ação no Turno:
+            </div>
+            <p class="text-slate-200 leading-snug">
+              {{ getMyRoleInTask(t) }}
+            </p>
+          </div>
+
+          <!-- Botão Expandir Passo a Passo -->
+          <div class="mt-2.5 pt-2 border-t border-slate-800 flex items-center justify-between">
+            <button @click="toggleExpand(t.number)" 
+                    class="text-[11px] font-bold text-ri-orange hover:text-orange-400 flex items-center gap-1.5">
+              <span>{{ isExpanded(t.number) ? 'Recolher instrução' : 'Ver passo a passo detalhado' }}</span>
+              <i class="fa-solid text-[9px]" :class="isExpanded(t.number) ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </button>
+            <span v-if="taskCompleted[t.number]" class="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
+              <i class="fa-solid fa-check-circle"></i> Concluída
+            </span>
+          </div>
+
+          <!-- Instrução Como Executar -->
+          <div v-show="isExpanded(t.number)" 
+               class="mt-2.5 bg-gradient-to-br from-amber-500/10 via-orange-500/10 to-transparent border border-amber-500/30 rounded-xl p-3 text-xs space-y-1.5">
+            <div class="font-bold text-amber-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-book-open"></i> Como Executar com Excelência:
+            </div>
+            <p class="text-slate-200 text-xs leading-relaxed">
+              {{ t.howTo }}
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= ABA MOBILE 2: TODAS AS 21 TAREFAS ================= -->
+      <div v-else-if="!searchQuery.trim() && mobileSubTab === 'mural21'" class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-black uppercase text-slate-400">Mural das 21 Tarefas</h3>
+          <span class="text-xs bg-slate-800 text-amber-400 px-2 py-0.5 rounded-lg border border-slate-700">21 Ações</span>
+        </div>
+
+        <!-- Filtro por Setor -->
+        <div class="flex items-center gap-1 overflow-x-auto custom-scroll pb-1">
+          <button @click="selectedSectorFilter = 'TODOS'" 
+                  :class="selectedSectorFilter === 'TODOS' ? 'bg-ri-orange text-white font-bold' : 'bg-slate-800 text-slate-400'"
+                  class="px-2.5 py-1 rounded-xl text-xs shrink-0">Todos</button>
+          <button v-for="sec in sectorsList" :key="sec" 
+                  @click="selectedSectorFilter = sec"
+                  :class="selectedSectorFilter === sec ? 'bg-ri-orange text-white font-bold' : 'bg-slate-800 text-slate-400'"
+                  class="px-2.5 py-1 rounded-xl text-xs shrink-0">{{ sec }}</button>
+        </div>
+
+        <div v-for="t in filteredAllTasks" :key="'all-mob-' + t.number" 
+             class="bg-slate-900 border border-slate-800 rounded-2xl p-3.5 space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded tracking-wider"
+                  :class="getSectorHeaderClass(t.sector)">
+              #{{ t.number }} • {{ t.sector }}
+            </span>
+            <span class="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full">{{ t.frequency }}</span>
+          </div>
+          <h4 class="font-black text-sm text-white leading-snug">{{ t.title }}</h4>
+          <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800 text-xs space-y-1">
+            <div v-if="t.morningAssignee && t.morningAssignee !== '—'" class="text-slate-300">
+              <strong class="text-amber-400">🌅 Manhã:</strong> {{ t.morningAssignee }} ({{ t.morningRole }})
+            </div>
+            <div v-if="t.afternoonAssignee && t.afternoonAssignee !== '—'" class="text-slate-300">
+              <strong class="text-purple-400">🌆 Tarde:</strong> {{ t.afternoonAssignee }} ({{ t.afternoonRole }})
+            </div>
+          </div>
+          <div class="text-[11px] text-slate-300 bg-amber-500/10 p-2.5 rounded-xl border border-amber-500/20 leading-relaxed">
+            <strong class="text-amber-300 block mb-0.5">Procedimento:</strong>
+            {{ t.howTo }}
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ABA MOBILE 3: PROTOCOLOS & ATALHOS PDV ================= -->
+      <div v-else-if="!searchQuery.trim() && mobileSubTab === 'protocolos'" class="space-y-3">
+        <!-- Sangria -->
+        <div class="bg-gradient-to-br from-red-950/40 to-slate-900 border border-red-500/40 rounded-2xl p-3.5 space-y-2">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-red-500 text-white flex items-center justify-center font-black text-xs">G1</div>
+            <div>
+              <span class="text-[9px] font-black text-red-400 uppercase">Protocolo de Caixa</span>
+              <h4 class="font-black text-sm text-white">Sangria a cada R$ 1.000</h4>
+            </div>
+          </div>
+          <p class="text-xs text-slate-300">Acionar liderança no microfone: <em>"G1, Caixa!"</em>. Maycon recolhe com escolta de Caren.</p>
+        </div>
+
+        <!-- Regra dos 70% -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3.5 space-y-2">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center font-black text-xs">70%</div>
+            <div>
+              <span class="text-[9px] font-black text-amber-400 uppercase">Intervalos</span>
+              <h4 class="font-black text-sm text-white">Regra de Efetivo em Loja</h4>
+            </div>
+          </div>
+          <p class="text-xs text-slate-300">No mínimo 70% do efetivo escalado presente no salão. Controle rigoroso por fichas físicas.</p>
+        </div>
+
+        <!-- Teclado Arius -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3.5 space-y-2.5">
+          <h4 class="font-black text-xs text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-keyboard"></i> Atalhos Teclado PDV Arius
+          </h4>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between">
+              <span class="font-black text-amber-400">F1</span>
+              <span class="text-slate-300 text-[11px]">Funções</span>
+            </div>
+            <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between">
+              <span class="font-black text-rose-400">F4</span>
+              <span class="text-slate-300 text-[11px]">Canc Cupom</span>
+            </div>
+            <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between">
+              <span class="font-black text-emerald-400">F5</span>
+              <span class="text-slate-300 text-[11px]">Dinheiro/Deliv</span>
+            </div>
+            <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between">
+              <span class="font-black text-teal-400">F7</span>
+              <span class="text-slate-300 text-[11px]">Débito/PIX</span>
+            </div>
+            <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between">
+              <span class="font-black text-blue-400">F8</span>
+              <span class="text-slate-300 text-[11px]">Crédito</span>
+            </div>
+            <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between">
+              <span class="font-black text-purple-400">S</span>
+              <span class="text-slate-300 text-[11px]">Cartão Gift</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ABA MOBILE 4: EQUIPE (12 MEMBROS) ================= -->
+      <div v-else-if="!searchQuery.trim() && mobileSubTab === 'equipe'" class="space-y-2">
+        <h3 class="text-xs font-black uppercase text-slate-400 mb-2">Escala dos 12 Colaboradores</h3>
+        <div v-for="person in allCollaboratorsList" :key="'team-mob-' + person.name"
+             @click="selectCollab(person.name); mobileSubTab = 'minhas'"
+             class="bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-2xl p-3 flex items-center justify-between gap-3 cursor-pointer transition-all">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <span class="w-9 h-9 rounded-xl flex items-center justify-center font-black text-sm text-white shrink-0"
+                  :class="getAvatarClass(person.name)">
+              {{ person.name.charAt(0) }}
+            </span>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="font-bold text-white text-xs truncate">{{ person.name }}</span>
+                <span class="text-[9px] text-amber-400 font-bold bg-slate-950 px-1.5 py-0.2 rounded border border-slate-800">
+                  {{ person.matricula }}
+                </span>
+              </div>
+              <div class="text-[10px] text-slate-400 truncate">{{ person.role }}</div>
+            </div>
+          </div>
+          <span class="text-[9px] font-bold px-2 py-0.5 rounded uppercase"
+                :class="getTurnoBadgeClass(person.shift)">
+            {{ person.shift }}
+          </span>
+        </div>
+      </div>
+
+      <!-- ================= RESULTADOS DA BUSCA (SE DIGITADO) ================= -->
+      <div v-if="searchQuery.trim()" class="space-y-3">
+        <div class="flex items-center justify-between text-xs text-amber-400 font-bold">
+          <span>Resultados para "{{ searchQuery }}" ({{ filteredSearchResults.length }})</span>
+          <button @click="searchQuery = ''" class="text-slate-400">Limpar</button>
+        </div>
+        <div v-for="t in filteredSearchResults" :key="'srch-' + t.number" 
+             class="bg-slate-900 border border-slate-800 rounded-2xl p-3.5 space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded tracking-wider"
+                  :class="getSectorHeaderClass(t.sector)">
+              #{{ t.number }} • {{ t.sector }}
+            </span>
+            <span class="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full">{{ t.frequency }}</span>
+          </div>
+          <h4 class="font-black text-sm text-white">{{ t.title }}</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">{{ t.howTo }}</p>
+        </div>
+      </div>
+
+      <!-- BARRA DE NAVEGAÇÃO INFERIOR MOBILE FIXA -->
+      <nav class="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 max-w-lg mx-auto w-full px-2 py-2">
+        <div class="grid grid-cols-4 gap-1">
+          <button @click="mobileSubTab = 'minhas'" 
+                  :class="mobileSubTab === 'minhas' ? 'text-ri-orange font-bold' : 'text-slate-400'"
+                  class="flex flex-col items-center justify-center py-1 transition-all">
+            <i class="fa-solid fa-user-check text-base mb-1"></i>
+            <span class="text-[10px]">Minhas</span>
+          </button>
+          <button @click="mobileSubTab = 'mural21'" 
+                  :class="mobileSubTab === 'mural21' ? 'text-ri-orange font-bold' : 'text-slate-400'"
+                  class="flex flex-col items-center justify-center py-1 transition-all">
+            <i class="fa-solid fa-list-check text-base mb-1"></i>
+            <span class="text-[10px]">21 Tarefas</span>
+          </button>
+          <button @click="mobileSubTab = 'protocolos'" 
+                  :class="mobileSubTab === 'protocolos' ? 'text-ri-orange font-bold' : 'text-slate-400'"
+                  class="flex flex-col items-center justify-center py-1 transition-all">
+            <i class="fa-solid fa-shield-halved text-base mb-1"></i>
+            <span class="text-[10px]">Protocolos</span>
+          </button>
+          <button @click="mobileSubTab = 'equipe'" 
+                  :class="mobileSubTab === 'equipe' ? 'text-ri-orange font-bold' : 'text-slate-400'"
+                  class="flex flex-col items-center justify-center py-1 transition-all">
+            <i class="fa-solid fa-users text-base mb-1"></i>
+            <span class="text-[10px]">Equipe (12)</span>
+          </button>
+        </div>
+      </nav>
+
+    </section>
+
+    <!-- ========================================================
+         PARTE 2: CENTRAL DE IMPRESSÃO & GESTÃO (PARA LÍDER / COMPUTADOR)
+         ======================================================== -->
+    <main v-if="currentMainMode === 'admin_print'" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 flex-1 flex flex-col gap-4">
+
+      <!-- SUB-BARRA DE NAVEGAÇÃO DA CENTRAL DE IMPRESSÃO -->
+      <div class="no-print bg-slate-900 border border-slate-800 p-2.5 rounded-2xl flex flex-wrap items-center justify-between gap-3 shadow-sm">
+        
+        <div class="flex items-center gap-1.5 flex-wrap">
+          
+          <!-- Aba 1: Frente dos 12 Crachás -->
+          <button @click="printTab = 'frente_crachas'" 
+                  :class="printTab === 'frente_crachas' ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-black shadow-md' : 'text-amber-400 hover:text-white'"
+                  class="px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 font-bold transition-all">
+            <i class="fa-solid fa-barcode"></i>
+            <span>FRENTE Crachás (12)</span>
+          </button>
+
+          <!-- Aba 2: Verso dos 12 Crachás -->
+          <button @click="printTab = 'doze_cards'" 
+                  :class="printTab === 'doze_cards' ? 'bg-white text-slate-950 font-black shadow-md' : 'text-slate-300 hover:text-white'"
+                  class="px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 font-bold transition-all">
+            <i class="fa-solid fa-address-card"></i>
+            <span>VERSO Crachás (12 P&B)</span>
+          </button>
+
+          <!-- Aba 3: Quadro Folha A4 Inteira -->
+          <button @click="printTab = 'quadro_a4'" 
+                  :class="printTab === 'quadro_a4' ? 'bg-emerald-600 text-white font-black shadow-md' : 'text-emerald-400 hover:text-white'"
+                  class="px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 font-bold transition-all">
+            <i class="fa-solid fa-file-powerpoint"></i>
+            <span>Quadro Folha A4</span>
+          </button>
+
+          <!-- Aba 4: Ficha Individual Oficial -->
+          <button @click="printTab = 'colaboradores'" 
+                  :class="printTab === 'colaboradores' ? 'bg-ri-orange text-white font-black shadow-md' : 'text-slate-300 hover:text-white'"
+                  class="px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 font-bold transition-all">
+            <i class="fa-solid fa-id-card"></i>
+            <span>Ficha Individual (A4)</span>
+          </button>
+
+          <!-- Aba 5: Grade 3x3 -->
+          <button @click="printTab = 'nove_cards'" 
+                  :class="printTab === 'nove_cards' ? 'bg-amber-500 text-slate-950 font-black shadow-md' : 'text-yellow-400 hover:text-white'"
+                  class="px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 font-bold transition-all">
+            <i class="fa-solid fa-clone"></i>
+            <span>9 Cards (3x3)</span>
+          </button>
+
+        </div>
+
+        <!-- BOTÕES DIRETOS DE DISPARO DE IMPRESSÃO -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <button v-if="printTab === 'frente_crachas'" @click="print12FrenteSheet" 
+                  class="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black px-4 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition-all">
+            <i class="fa-solid fa-print"></i> IMPRIMIR FRENTE (12 CARDS)
+          </button>
+
+          <button v-if="printTab === 'doze_cards'" @click="print12CrachasSheet" 
+                  class="bg-white hover:bg-slate-100 text-slate-950 font-black px-4 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition-all">
+            <i class="fa-solid fa-print"></i> IMPRIMIR VERSO (12 CARDS)
+          </button>
+
+          <button v-if="printTab === 'quadro_a4'" @click="printQuadroA4Full" 
+                  class="bg-emerald-600 hover:bg-emerald-500 text-white font-black px-4 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition-all">
+            <i class="fa-solid fa-print"></i> IMPRIMIR QUADRO A4
+          </button>
+
+          <button v-if="printTab === 'colaboradores'" @click="printCurrentCardIndividual" 
+                  class="bg-ri-purple hover:bg-purple-600 text-white font-black px-4 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition-all">
+            <i class="fa-solid fa-print"></i> IMPRIMIR FICHA INDIVIDUAL
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ================= SEÇÃO DE IMPRESSÃO: FRENTE DOS 12 CRACHÁS ================= -->
+      <section v-if="printTab === 'frente_crachas'" class="space-y-4">
+        
+        <!-- PAINEL DE CONTROLE DOS QR CODES E VERCEL -->
+        <div class="no-print bg-slate-900 border border-slate-800 p-4 rounded-3xl space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span class="bg-amber-400 text-slate-950 text-[10px] font-black uppercase px-2 py-0.5 rounded">
+                Configuração para Hospedagem no Vercel
+              </span>
+              <h3 class="brand-font font-black text-base text-white mt-1">
+                Geração Dinâmica de QR Code para Cada Colaborador
+              </h3>
+              <p class="text-xs text-slate-400">
+                Os QR Codes abaixo já apontam individualmente para cada colaborador. No Vercel, o link padrão é a própria URL do site!
+              </p>
+            </div>
+            
+            <button @click="print12FrenteSheet" 
+                    class="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black px-5 py-2 rounded-xl text-xs shadow-lg flex items-center gap-2">
+              <i class="fa-solid fa-print text-sm"></i>
+              <span>IMPRIMIR FRENTE (12 CRACHÁS A4)</span>
+            </button>
+          </div>
+
+          <!-- Input da URL Base -->
+          <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 text-xs space-y-2">
+            <label class="font-bold text-amber-300 block flex items-center justify-between">
+              <span><i class="fa-solid fa-globe mr-1"></i> URL do Repositório / Vercel (onde o site está publicado):</span>
+              <span class="text-[10px] text-slate-400 font-normal">Detectada automaticamente</span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input v-model="qrBaseUrl" 
+                     @change="generateBarcodesAndQRCodes" 
+                     type="text" 
+                     placeholder="https://supertatico.vercel.app/" 
+                     class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400">
+              <button @click="useCurrentOriginUrl" 
+                      class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold px-3 py-2 rounded-xl text-xs shrink-0 transition-all">
+                <i class="fa-solid fa-location-crosshairs mr-1"></i> Usar URL Atual
+              </button>
+              <button @click="generateBarcodesAndQRCodes" 
+                      class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-3.5 py-2 rounded-xl text-xs shrink-0 transition-all">
+                <i class="fa-solid fa-arrows-rotate mr-1"></i> Atualizar QR
+              </button>
+            </div>
+            
+            <!-- Opções de Impressão -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800 text-xs">
+              <label class="flex items-center gap-2 cursor-pointer select-none text-slate-300">
+                <input type="checkbox" v-model="hideArtOnPrint" class="w-4 h-4 rounded text-amber-500">
+                <span><strong>Ocultar arte do topo ao imprimir</strong> (deixar topo em branco para folha pré-impressa)</span>
+              </label>
+
+              <label class="flex items-center gap-2 cursor-pointer select-none text-slate-300">
+                <input type="checkbox" v-model="duplexMirrorMode" @change="generateBarcodesAndQRCodes" class="w-4 h-4 rounded text-amber-500">
+                <span><strong>Espelhar colunas duplex</strong> (inverte Colunas 1 e 3 para imprimir no verso da mesma folha)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- GRADE DE 12 CRACHÁS FRENTE (VERTICAL 5,2 x 7,0 cm) -->
+        <div class="sheet-12-crachas-frente grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-center">
+          <div v-for="c in listFrenteCrachas" :key="'frente-' + c.name" 
+               class="cracha-frente-badge bg-white border-2 border-dashed border-black rounded-lg p-2 flex flex-col justify-between text-black shadow-none avoid-break"
+               style="width: 51.5mm; max-width: 52mm; height: 70mm; max-height: 70mm;">
+            
+            <!-- METADE DE CIMA (34mm): ARTE PRÉ-IMPRESSA -->
+            <div class="h-[34mm] flex flex-col items-center justify-center border-b border-dashed border-gray-300 overflow-hidden relative"
+                 :class="hideArtOnPrint ? 'print:border-none print:opacity-0' : ''">
+              
+              <div v-if="!hideArtOnPrint" class="w-full h-full flex flex-col items-center justify-center p-1 text-center bg-gradient-to-b from-orange-50 to-amber-50 rounded">
+                <div class="text-[9px] font-black tracking-widest text-ri-orange uppercase flex items-center gap-1">
+                  <span class="w-4 h-4 rounded bg-ri-orange text-white flex items-center justify-center text-[8px] font-black">10</span>
+                  <span>RI HAPPY</span>
+                </div>
+                <div class="text-[8px] font-extrabold text-slate-800 uppercase mt-0.5 tracking-tight">
+                  CAMISA 10 • DDC 2026
+                </div>
+                <div class="text-[6.5px] text-gray-500 font-medium mt-0.5">
+                  [ Arte Superior do Crachá ]
+                </div>
+              </div>
+
+              <div v-else class="text-[7.5px] text-gray-400 font-bold uppercase text-center no-print p-2">
+                <i class="fa-solid fa-image text-gray-300 text-lg block mb-1"></i>
+                Espaço da Arte Pré-Impressa<br>
+                <span class="text-[6.5px] text-gray-400 font-normal">(Ficará em branco na impressão)</span>
+              </div>
+            </div>
+
+            <!-- METADE DE BAIXO (34mm): NOME GRANDE, MATRÍCULA, CÓDIGO DE BARRAS E QR CODE -->
+            <div class="h-[34mm] flex flex-col justify-between overflow-hidden pt-1">
+              
+              <!-- Nome Grande & Cargo -->
+              <div class="text-center leading-tight">
+                <h2 class="brand-font font-black text-[15px] text-black leading-none uppercase tracking-tight">
+                  {{ c.name }}
+                </h2>
+                <div class="text-[6.5px] font-semibold text-gray-700 uppercase tracking-tight mt-0.5 truncate">
+                  {{ c.role }}
+                </div>
+              </div>
+
+              <!-- Linha Inferior: Código de Barras (Esq) + QR Code (Dir) -->
+              <div class="flex items-center justify-between gap-1 mt-1">
+                
+                <!-- Coluna Esquerda: Código de Barras da Matrícula para Bipar -->
+                <div class="flex-1 flex flex-col items-center justify-center overflow-hidden">
+                  <svg :id="'barcode-' + c.name" class="w-full max-w-[28mm] h-[13.5mm]"></svg>
+                  <div class="text-[7.5px] font-black text-black tracking-wider leading-none mt-0.5">
+                    MATR. {{ c.matricula }}
+                  </div>
+                </div>
+
+                <!-- Coluna Direita: QR Code para Celular -->
+                <div class="w-[18mm] flex flex-col items-center justify-center shrink-0">
+                  <div :id="'qrcode-' + c.name" class="w-[15mm] h-[15mm] flex items-center justify-center bg-white p-0.5 border border-black rounded"></div>
+                  <div class="text-[5.5px] font-black text-black uppercase tracking-tight text-center leading-none mt-0.5">
+                    📱 TELA DE {{ c.name.toUpperCase() }}
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= SEÇÃO DE IMPRESSÃO: VERSO DOS 12 CRACHÁS (P&B) ================= -->
+      <section v-if="printTab === 'doze_cards'" class="space-y-4">
+        <div class="sheet-12-crachas-vertical grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-center">
+          <div v-for="c in allCollaboratorsList" :key="'vert-' + c.name" 
+               class="cracha-vertical-badge bg-white border-2 border-dashed border-black rounded-lg p-2.5 flex flex-col justify-between text-black shadow-none avoid-break"
+               style="width: 51.5mm; max-width: 52mm; height: 70mm; max-height: 70mm;">
+            <div class="flex-1 flex flex-col overflow-hidden">
+              <div class="border-b-2 border-black pb-1 mb-1.5 flex items-baseline justify-between gap-1 shrink-0">
+                <h3 class="brand-font font-black text-sm text-black leading-none uppercase tracking-tight">
+                  {{ c.name }}
+                </h3>
+                <span class="text-[7.5px] font-black border border-black px-1.5 py-0.2 rounded text-black bg-white shrink-0">
+                  MATR. {{ c.matricula }}
+                </span>
+              </div>
+
+              <div class="space-y-1.5 overflow-hidden flex-1 flex flex-col justify-around py-0.5">
+                <div v-for="t in getTasksForCollaborator(c.name)" :key="t.number" class="text-black">
+                  <div class="font-black text-[7.5px] text-black leading-none">#{{ t.number }}</div>
+                  <div class="font-semibold text-[7px] text-black break-words leading-tight mt-0.5">{{ t.title }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SEÇÃO DE IMPRESSÃO: QUADRO GERAL A4 INTEIRO ================= -->
+      <section v-if="printTab === 'quadro_a4'" class="space-y-4">
+        <div class="quadro-a4-full-page bg-white text-black p-4 rounded-3xl border-2 border-black">
+          <div class="border-b-2 border-black pb-2 mb-2 flex items-center justify-between">
+            <div>
+              <span class="bg-black text-white text-[9px] font-black uppercase px-2 py-0.5 rounded">QUADRO GERAL OPERACIONAL</span>
+              <h2 class="brand-font text-lg font-black uppercase text-black leading-none mt-1">21 TAREFAS OFICIAIS • CAMISA 10</h2>
+            </div>
+            <div class="text-right text-[10px] font-black text-black">GRUPO RI HAPPY • DDC 2026</div>
+          </div>
+
+          <table class="table-a4-single w-full border-collapse border border-black text-left text-xs">
+            <thead>
+              <tr class="bg-black text-white text-[10px]">
+                <th class="border border-black p-1 text-center w-8">#</th>
+                <th class="border border-black p-1">Setor</th>
+                <th class="border border-black p-1">Frequência</th>
+                <th class="border border-black p-1">Missão & Procedimento</th>
+                <th class="border border-black p-1">🌅 Manhã (Responsável & Papel)</th>
+                <th class="border border-black p-1">🌆 Tarde (Responsável & Papel)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="t in officialTasksList" :key="'quadro-' + t.number" class="border-b border-gray-300 text-[10px]">
+                <td class="border border-black p-1 font-black text-center">{{ t.number }}</td>
+                <td class="border border-black p-1 font-bold">{{ t.sector }}</td>
+                <td class="border border-black p-1">{{ t.frequency }}</td>
+                <td class="border border-black p-1"><strong>{{ t.title }}</strong></td>
+                <td class="border border-black p-1">{{ t.morningAssignee }} — {{ t.morningRole }}</td>
+                <td class="border border-black p-1">{{ t.afternoonAssignee }} — {{ t.afternoonRole }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SEÇÃO DE IMPRESSÃO: FICHA INDIVIDUAL A4 ================= -->
+      <section v-if="printTab === 'colaboradores'" class="space-y-4">
+        
+        <!-- Seleção de Colaborador -->
+        <div class="no-print bg-slate-900 border border-slate-800 p-3 rounded-2xl flex items-center justify-between">
+          <span class="text-xs text-amber-400 font-bold">Selecione para imprimir a ficha:</span>
+          <div class="flex items-center gap-1.5 overflow-x-auto custom-scroll">
+            <button v-for="person in allCollaboratorsList" :key="'adm-' + person.name"
+                    @click="selectedCollabName = person.name"
+                    :class="selectedCollabName === person.name ? 'bg-ri-orange text-white font-black' : 'bg-slate-800 text-slate-300'"
+                    class="px-2.5 py-1 rounded-xl text-xs shrink-0">
+              {{ person.name }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Ficha Impressa -->
+        <div class="card-individual-printable bg-white text-black p-6 rounded-3xl border-2 border-black">
+          <div class="border-b-2 border-black pb-3 flex items-center justify-between">
+            <div>
+              <span class="bg-black text-white text-[9px] font-black uppercase px-2 py-0.5 rounded">FICHA OFICIAL DO COLABORADOR</span>
+              <h2 class="brand-font text-2xl font-black uppercase text-black leading-tight mt-1">{{ selectedCollab.name }}</h2>
+              <div class="text-xs font-bold text-gray-800">{{ selectedCollab.fullName }} • Matrícula: {{ selectedCollab.matricula }}</div>
+            </div>
+            <div class="text-right text-xs">
+              <span class="border border-black font-black px-2 py-0.5 rounded uppercase">{{ selectedCollab.shift }}</span>
+              <div class="text-gray-600 mt-1">{{ selectedCollab.schedule }}</div>
+            </div>
+          </div>
+
+          <div class="my-3 p-3 bg-gray-100 rounded-xl border border-gray-300 text-xs">
+            <strong>DIRETRIZ DO TURNO:</strong> {{ selectedCollab.directive }}
+          </div>
+
+          <h3 class="font-black text-sm uppercase mt-4 mb-2">Tarefas Sob Sua Responsabilidade:</h3>
+          <div class="space-y-2">
+            <div v-for="t in selectedCollabTasks" :key="'adm-task-' + t.number" class="border border-gray-300 p-3 rounded-xl">
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="font-black">#{{ t.number }} • {{ t.sector }}</span>
+                <span class="bg-gray-200 px-2 py-0.5 rounded font-bold">{{ t.frequency }}</span>
+              </div>
+              <h4 class="font-bold text-sm">{{ t.title }}</h4>
+              <p class="text-xs text-gray-700 mt-1"><strong>Sua Ação:</strong> {{ getRoleForCollabInTask(selectedCollab.name, t) }}</p>
+              <p class="text-[11px] text-gray-600 mt-1"><strong>Como Fazer:</strong> {{ t.howTo }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SEÇÃO DE IMPRESSÃO: 9 CARDS 3X3 ================= -->
+      <section v-if="printTab === 'nove_cards'" class="space-y-4">
+        <div class="sheet-crachas-page grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <div v-for="c in currentCrachasDisplay" :key="'card9-' + c.name" 
+               class="cracha-badge bg-white text-black border-2 border-dashed border-black rounded-xl p-3 flex flex-col justify-between">
+            <div class="border-b border-black pb-1 mb-1">
+              <h3 class="font-black text-sm uppercase">{{ c.name }}</h3>
+              <div class="text-[10px] text-gray-600">Matr. {{ c.matricula }} • {{ c.shift }}</div>
+            </div>
+            <div class="space-y-1 my-1">
+              <div v-for="t in getTasksForCollaborator(c.name)" :key="'c9-t-' + t.number" class="text-[10px] leading-tight">
+                <strong>#{{ t.number }}</strong> {{ t.title }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- SCRIPT VUE 3 COMPLETO -->
+  <script>
+    const { createApp, ref, computed, nextTick, watch, onMounted } = Vue;
+
+    createApp({
+      setup() {
+        // Controle de Modo Principal: 'collaborator' (Celular) vs 'admin_print' (Impressão)
+        const currentMainMode = ref('collaborator');
+        const mobileSubTab = ref('minhas');
+        const printTab = ref('frente_crachas');
+        const printMode = ref('normal');
+        const selectedCollabName = ref('Maycon');
+        const searchQuery = ref('');
+        const selectedSectorFilter = ref('TODOS');
+        const expandedTasks = ref({});
+        const taskCompleted = ref({});
+        const selectedCrachaSheet = ref(1);
+
+        // Configuração de URL do QR Code (Adaptável ao Vercel)
+        const qrBaseUrl = ref('');
+        const hideArtOnPrint = ref(true);
+        const duplexMirrorMode = ref(false);
+
+        // 12 COLABORADORES OFICIAIS COM METADADOS
+        const allCollaboratorsList = [
+          {
+            name: 'Maycon',
+            fullName: 'MAYCON DA SILVA (LÍDER DA LOJA)',
+            matricula: '106753',
+            cpf: 'Liderança Ri Happy',
+            admissao: 'Gestão 2026',
+            role: 'Líder da Loja / Maestro Geral (Camisa 10)',
+            shift: 'Geral',
+            schedule: 'Jornada Dinâmica / Cobertura Integral',
+            directive: 'Orquestrar a loja inteira. Conduzir a Reunião Paradinha diária, controlar as fichas físicas de intervalo (Regra dos 70%), recolher imediatamente as sangrias de R$ 1.000 para o cofre e atuar como facilitador nos pontos de maior pressão.'
+          },
+          {
+            name: 'Aline',
+            fullName: 'ALINE DOS SANTOS FORMENTO SILVA',
+            matricula: '177324',
+            cpf: '120.556.217-69',
+            admissao: '03/09/2024',
+            role: 'Coringa Balcão & Operadora de Caixa',
+            shift: 'Fechamento',
+            schedule: '13:40 às 22:00',
+            directive: 'Comandar a agilidade do caixa ao lado do pacote. Disparar no microfone o alarme "G1, Caixa" ao acumular R$ 1.000, fazer a rota de troco de moedas com vizinhos à tarde e ofertar rolinhos de presente para esvaziar a fila do pacote.'
+          },
+          {
+            name: 'Erika',
+            fullName: 'ERIKA MONIQUE FONSECA DA CUNHA',
+            matricula: '10883',
+            cpf: '111.067.347-77',
+            admissao: '10/11/2016',
+            role: 'Dona do Pacote & Insumos',
+            shift: 'Manhã',
+            schedule: '09:00 às 17:20',
+            directive: 'Garantir que o pacote seja veloz e sem filas. Deixar previamente embalados no mínimo 10 brinquedos volumosos (Casa da Barbie, Totokinha, Farol Patrulha), abastecer o caixa com rolinhos e confeccionar envelopes de presente do PP ao GG.'
+          },
+          {
+            name: 'Renata',
+            fullName: 'RENATA MUNIZ DOS REIS',
+            matricula: '181979',
+            cpf: '083.082.357-35',
+            admissao: '06/03/2025',
+            role: 'Vendedora & Guardiã de VM',
+            shift: 'Manhã',
+            schedule: '09:00 às 17:20',
+            directive: 'Recepcionar clientes a 2m da porta com bolhas de sabão, sorriso e alegria (jamais postura de fiscal). Garantir a vitrine 100% impecável antes de levantar as portas e auditar a precificação das apostas do dia.'
+          },
+          {
+            name: 'Luiz',
+            fullName: 'LUIZ CLAUDIO MACHADO JUNIOR',
+            matricula: '181954',
+            cpf: '059.074.577-83',
+            admissao: '06/03/2025',
+            role: 'Vendedor Especialista de Brinquedos',
+            shift: 'Fechamento',
+            schedule: '13:40 às 22:00',
+            directive: 'Atendimento consultivo e recepção festiva no pico da tarde. Passar busca-preço em gôndolas de destaque, divulgar ofertas homologadas no WhatsApp e participar da reposição noturna do fundo para a frente.'
+          },
+          {
+            name: 'Lidiane',
+            fullName: 'LIDIANE BARBOSA DA SILVA',
+            matricula: '182409',
+            cpf: '112.173.477-47',
+            admissao: '18/06/2025',
+            role: 'Vendedora & Apoio Visual Merchandising',
+            shift: 'Fechamento',
+            schedule: '13:40 às 22:00',
+            directive: 'Atendimento ativo nos horários de maior fluxo. Checar a vitrine ao longo da tarde repondo qualquer furo imediatamente, reforçar a precificação de pontas e disparar artes do Deskfy no WhatsApp da loja.'
+          },
+          {
+            name: 'Bianca',
+            fullName: 'BIANCA DOS SANTOS RODRIGUES',
+            matricula: '182397',
+            cpf: '093.578.197-89',
+            admissao: '18/06/2025',
+            role: 'Coringa Abastecimento & Omni Digital',
+            shift: 'Intermediário',
+            schedule: '11:00 às 19:20',
+            directive: 'Fazer a ponte entre os turnos. Monitorar pedidos de iFood, Rappi, 99 e InStore; executar as rondas horárias de trocas e abastecer imediatamente os furos de gôndola identificados no salão.'
+          },
+          {
+            name: 'Thais',
+            fullName: 'THAIS DE OLIVEIRA MARQUES ROBERTO',
+            matricula: '184364',
+            cpf: '195.313.847-03',
+            admissao: '03/11/2025',
+            role: 'Apoio Abastecimento & Rondas de Salão',
+            shift: 'Fechamento',
+            schedule: '13:40 às 22:00',
+            directive: 'Executar as rondas das 16h, 18h e 20h no checkout recolhendo itens abandonados e lixo. Atuar na triagem de avarias da tarde (DEP 14 vs 06) e repor brinquedos volumosos embalados para o pacote.'
+          },
+          {
+            name: 'Jheferson',
+            fullName: 'JHEFERSON ISRAEL DA SILVA',
+            matricula: '177432',
+            cpf: '177.810.597-19',
+            admissao: '03/09/2024',
+            role: 'Estoquista Oficial (Dono do Estoque)',
+            shift: 'Manhã',
+            schedule: '08:00 às 16:20',
+            directive: 'Manter a retaguarda organizada e com corredores livres de 90cm. Conferir doca, e-mails de agendamento de fornecedores, dar entrada em 100% das NFs no portal no mesmo dia e fazer a triagem matinal DEP 14 vs DEP 06.'
+          },
+          {
+            name: 'Maria',
+            fullName: 'MARIA LUISA VERONEZE PAES DOS SANTOS (MALU)',
+            matricula: '186032',
+            cpf: '165.914.527-96',
+            admissao: '02/09/2026',
+            role: 'Auxiliar de Estoque & Faturamento Omni',
+            shift: 'Manhã',
+            schedule: '09:00 às 17:20',
+            directive: 'Puxar a reposição de abertura pela vitrine e frente usando o relatório D-1. Faturar e embalar pedidos de iFood, Rappi, 99 e Omni a cada 1 hora e apoiar nas trocas matinais.'
+          },
+          {
+            name: 'Rafa',
+            fullName: 'RAFAELLY CHRISTINA VIEIRA DA SILVA',
+            matricula: '185038',
+            cpf: '178.421.597-00',
+            admissao: '02/02/2026',
+            role: 'Jovem Aprendiz (TI & Operações)',
+            shift: 'Manhã',
+            schedule: '09:00 às 15:00',
+            directive: 'Testar todos os PDVs (Arius e Simplifique contingência), POS, celulares e pilhas antes da abertura. Ligar a plataforma Musique no volume ideal e realizar as rondas de checkout das 10h, 12h e 14h.'
+          },
+          {
+            name: 'Caren',
+            fullName: 'CAREN LOPES VIANA GEORGE',
+            matricula: '160928',
+            cpf: '053.514.787-22',
+            admissao: '01/10/2021',
+            role: 'Fiscal de Loja (Prevenção & Segurança)',
+            shift: 'Fechamento',
+            schedule: '13:40 às 22:00',
+            directive: 'Postura preventiva acolhedora no salão. Após a saída dos clientes, realizar a ronda noturna com 100% das luzes acesas (salas, forro, estoque e vestiários), checando trancas e desligamento do ar-condicionado.'
+          }
+        ];
+
+        // 21 TAREFAS OFICIAIS COMPLETAS
+        const officialTasksList = [
+          {
+            number: 1,
+            sector: 'OPERAÇÕES',
+            frequency: 'Abertura & Pico',
+            title: 'Recepção e acolhimento na entrada da loja',
+            morningAssignee: 'Renata (Vendas)',
+            morningRole: 'Ficar a 2m da porta com bolhas de sabão, sorriso e sem postura de fiscal',
+            afternoonAssignee: 'Luiz, Lidiane e Caren',
+            afternoonRole: 'Revezamento de pico com acolhimento alegre e retaguarda preventiva de Caren',
+            howTo: 'Posicione-se a aprox. 2 metros da entrada. Dê boas-vindas com sorriso contagiante, usando bolhas de sabão, malabares ou fantasias. Jamais cruze os braços ou adote postura de segurança/fiscal.'
+          },
+          {
+            number: 2,
+            sector: 'OPERAÇÕES',
+            frequency: 'A cada 2 Horas',
+            title: 'Ronda de 2h no checkout (limpeza e itens abandonados)',
+            morningAssignee: 'Rafa (Aprendiz)',
+            morningRole: 'Rondas das 10h, 12h e 14h nas filas e caixas',
+            afternoonAssignee: 'Thais (Apoio)',
+            afternoonRole: 'Rondas das 16h, 18h e 20h no fluxo pesado',
+            howTo: 'Percorrer todas as filas e cestas de checkout. Recolher brinquedos que clientes desistiram de comprar para devolução ao estoque; recolher copos descartáveis, papéis e embalagens vazias.'
+          },
+          {
+            number: 3,
+            sector: 'OPERAÇÕES',
+            frequency: 'Antes de Abrir',
+            title: 'Teste de equipamentos de operação e contingência',
+            morningAssignee: 'Rafa e Maycon',
+            morningRole: 'Testar PDVs Arius, Simplifique, POS, celulares e pilhas',
+            afternoonAssignee: '—',
+            afternoonRole: '',
+            howTo: 'Conferir se os equipamentos em geral estão funcionando perfeitamente: pilhas para teste de brinquedos, máquinas de cartão POS carregadas, sistema Arius no ar, contingência Simplifique e celulares da loja.'
+          },
+          {
+            number: 4,
+            sector: 'OPERAÇÕES',
+            frequency: 'A cada 1 Hora',
+            title: 'Execução e triagem horária de trocas',
+            morningAssignee: 'Erika e Maria',
+            morningRole: 'Ronda horária: devolver perfeitos ao salão e enviar defeitos à triagem',
+            afternoonAssignee: 'Bianca e Thais',
+            afternoonRole: 'Ronda horária no pico: manter ponto de trocas limpo e sem acúmulo',
+            howTo: 'Garantir etiquetas e formulários no ponto de troca. A cada 60 minutos, recolher os produtos trocados: perfeitos voltam às gôndolas de imediato; avariados vão para a triagem técnica (DEP 14 ou 06).'
+          },
+          {
+            number: 5,
+            sector: 'OPERAÇÕES',
+            frequency: 'A cada 1 Hora',
+            title: 'Ronda horária para reposição de produtos vendidos',
+            morningAssignee: 'Jheferson e Maria (Estoque)',
+            morningRole: 'Monitorar furos de gôndola e alimentar reposição a partir do estoque',
+            afternoonAssignee: 'Bianca e Thais (Abastecimento)',
+            afternoonRole: 'Puxar reposição contínua conforme vendas ocorridas no salão',
+            howTo: 'Manter alarme no celular a cada 1 hora. Durante a vistoria no salão, identificar nichos vazios e comunicar de imediato o estoque via rádio ou grupo do WhatsApp para reposição imediata.'
+          },
+          {
+            number: 6,
+            sector: 'OPERAÇÕES',
+            frequency: 'Fechamento',
+            title: 'Ronda de segurança com luz acesa e desligar ar-condicionado',
+            morningAssignee: '—',
+            morningRole: '',
+            afternoonAssignee: 'Caren (Fiscal de Loja)',
+            afternoonRole: 'Vistoria pós-clientes com luzes acesas, checagem de trancas e desligar ar',
+            howTo: 'Após o fechamento da loja e saída de todos os clientes, acender as luzes e inspecionar todos os ambientes (salão, estoque, vestiários, salas e forro). Garantir desligamento do ar e trancar acessos.'
+          },
+          {
+            number: 7,
+            sector: 'DIGITAL',
+            frequency: 'A cada 1 Hora',
+            title: 'Atendimento Delivery (iFood, Rappi, 99) e Omni (Pick Up/Ship)',
+            morningAssignee: 'Maria (Aux. Estoque / Omni)',
+            morningRole: 'Checar InStore e apps horários; faturar e embalar antes do entregador',
+            afternoonAssignee: 'Bianca (Interm. Omni)',
+            afternoonRole: 'Tratar pedidos de pico; avisar Pick-up no WhatsApp com 10% no item extra',
+            howTo: 'Alarme a cada 1h para checar InStore, iFood, Rappi e 99. Separar itens, faturar no Omni e embrulhar antes da chegada do entregador. Pedidos Pick-Up: avisar cliente pelo WhatsApp oferecendo 10% de desconto no item adicional.'
+          },
+          {
+            number: 8,
+            sector: 'ESTOQUE',
+            frequency: 'Pré-Abertura',
+            title: 'Organização e reposição pré-abertura (Vitrine e D-1)',
+            morningAssignee: 'Jheferson e Maria',
+            morningRole: 'Iniciar abastecimento pela vitrine e frente usando relatório D-1',
+            afternoonAssignee: '—',
+            afternoonRole: '',
+            howTo: 'Imprimir vendas do dia anterior (D-1). Começar o abastecimento obrigatoriamente pela VITRINE e frente da loja, abrindo espaço para os produtos de maior giro e relíquias da diversão.'
+          },
+          {
+            number: 9,
+            sector: 'ESTOQUE',
+            frequency: 'Fechamento',
+            title: 'Organização e reposição noturna (Do Fundo para a Frente)',
+            morningAssignee: '—',
+            morningRole: '',
+            afternoonAssignee: 'Thais, Luiz e Lidiane',
+            afternoonRole: 'Reposição do fundo para a frente com as relíquias expostas',
+            howTo: 'Ao encerrar as portas, organizar e reabastecer a loja no sentido inverso: do FUNDO para a FRENTE, alinhando nichos e deixando as relíquias da diversão em destaque para a manhã seguinte.'
+          },
+          {
+            number: 10,
+            sector: 'ESTOQUE',
+            frequency: 'Diário / Manhã',
+            title: 'Agenda de entregas e entrada de 100% das Notas Fiscais',
+            morningAssignee: 'Jheferson (Estoquista)',
+            morningRole: 'Checar doca, e-mails de agendamento e dar entrada em 100% das NFs',
+            afternoonAssignee: '—',
+            afternoonRole: '',
+            howTo: 'Checar janelas de entrega do shopping e e-mail da loja. Dar entrada em 100% das NFs dos produtos que chegarem no dia antes de liberar qualquer mercadoria para a área de vendas.'
+          },
+          {
+            number: 11,
+            sector: 'ESTOQUE',
+            frequency: '2x ao Dia',
+            title: 'Triagem técnica de defeitos: DEP 14 vs DEP 06',
+            morningAssignee: 'Jheferson (Estoquista)',
+            morningRole: 'Triagem matinal: DEP 14 (pequenas avarias) e DEP 06 (inaptos para venda)',
+            afternoonAssignee: 'Thais (Apoio Estoque)',
+            afternoonRole: 'Triagem dos produtos recolhidos de trocas antes do encerramento',
+            howTo: 'Separar rigorosamente: DEP 14 para caixas danificadas ou avarias leves passíveis de venda com desconto; DEP 06 para brinquedos quebrados ou sem condições de venda para baixa contábil imediata.'
+          },
+          {
+            number: 12,
+            sector: 'VM',
+            frequency: 'Abertura & Pico',
+            title: 'Precificação correta em gôndolas, pilhas, pontas e cartazes',
+            morningAssignee: 'Renata (Guardiã VM)',
+            morningRole: 'Auditoria de abertura, troca de etiquetas e reimpressão de cartazes',
+            afternoonAssignee: 'Luiz e Bianca',
+            afternoonRole: 'Auditoria ativa com busca-preço móvel nas pontas de destaque',
+            howTo: 'Usar busca-preço portátil para auditar valores nas prateleiras. Reimprimir cartazes danificados. Nenhuma mercadoria pode estar exposta sem preço visível.'
+          },
+          {
+            number: 13,
+            sector: 'VM',
+            frequency: 'Diário',
+            title: 'Ofertas e apostas do dia expostas com placas oficiais',
+            morningAssignee: 'Renata (Vendas)',
+            morningRole: 'Montar gôndolas de entrada conforme guia sazonal de ofertas',
+            afternoonAssignee: 'Luiz e Lidiane (Vendas)',
+            afternoonRole: 'Manter abastecimento e alinhamento visual das apostas no pico',
+            howTo: 'Seguir o Guia de Exposição DDC 2026. Abastecer as gôndolas de entrada com as apostas principais de venda e placas promocionais oficiais.'
+          },
+          {
+            number: 14,
+            sector: 'VM',
+            frequency: 'Abertura & Tarde',
+            title: 'Vitrine limpa, precificada e temática (Guia de Exposição)',
+            morningAssignee: 'Renata (Antes de abrir)',
+            morningRole: 'Vitrine impecável antes de subir as portas da loja na abertura',
+            afternoonAssignee: 'Lidiane (Auditoria Tarde)',
+            afternoonRole: 'Checar vitrine na tarde e repor qualquer furo imediatamente',
+            howTo: 'Garantir vidros limpos, produtos precificados, iluminação voltada aos brinquedos principais e ambientação temática completa antes de abrir a loja.'
+          },
+          {
+            number: 15,
+            sector: 'CAIXA',
+            frequency: 'A cada R$ 1.000',
+            title: 'Sangria de caixa a cada R$ 1.000 (Código "G1, Caixa!")',
+            morningAssignee: 'Maycon (Líder recolhe)',
+            morningRole: 'Recolhimento pontual matinal para o cofre',
+            afternoonAssignee: 'Aline (Aciona) / Maycon e Caren (Recolhe/Segurança)',
+            afternoonRole: 'Aline chama "G1, Caixa" no microfone; Maycon retira o malote com escolta de Caren',
+            howTo: 'Ao atingir R$ 1.000 no caixa, a operadora aciona a liderança no microfone: "G1, Caixa". O líder vem imediatamente ao caixa com o malote e guarda o valor no cofre.'
+          },
+          {
+            number: 16,
+            sector: 'CAIXA',
+            frequency: 'Abertura & Tarde',
+            title: 'Troco no caixa e rota preventiva com lojas vizinhas',
+            morningAssignee: 'Maycon (Conferência)',
+            morningRole: 'Conferir moedas e cédulas fracionadas no cofre antes de abrir',
+            afternoonAssignee: 'Aline (Rota Externa)',
+            afternoonRole: 'Fazer rota de troca de moedas e notas baixas com vizinhos à tarde',
+            howTo: 'Conferir moedas e cédulas fracionadas no início do dia. À tarde, realizar rota com lojistas vizinhos do shopping para obter troco, prevenindo falta nos horários de pico.'
+          },
+          {
+            number: 17,
+            sector: 'CAIXA',
+            frequency: 'Contínuo',
+            title: 'Oferta ativa de "rolinhos" de papel de presente no caixa',
+            morningAssignee: 'Erika e Rafa (Produção)',
+            morningRole: 'Confeccionar e abastecer os caixas com rolinhos prontos',
+            afternoonAssignee: 'Aline (Oferta no Caixa)',
+            afternoonRole: 'Oferecer ativamente para clientes que queiram embalar em casa',
+            howTo: 'Manter cestos no caixa sempre abastecidos com "rolinhos" prontos de presente. A operadora pergunta se o cliente prefere levar o rolo para embalar em casa, desafogando o balcão de pacote.'
+          },
+          {
+            number: 18,
+            sector: 'PACOTE',
+            frequency: 'A cada 2 Horas',
+            title: 'Auditoria de insumos e envelopes PP ao GG no pacote',
+            morningAssignee: 'Erika (Dona do Pacote)',
+            morningRole: 'Auditar fitilhos, bobinas, sacolas e confeccionar envelopes de todos os portes',
+            afternoonAssignee: 'Erika e Aline (Balcão)',
+            afternoonRole: 'Manter bancada abastecida e balcão sem filas no pico',
+            howTo: 'Conferir estoque de sacolas e insumos para os próximos dias. Deixar confeccionados previamente envelopes de todos os portes (PP a GG) para embalagem ultrarrápida.'
+          },
+          {
+            number: 19,
+            sector: 'PACOTE',
+            frequency: 'Abertura & Vazio',
+            title: 'Embrulho prévio de itens grandes (mínimo 10 unidades)',
+            morningAssignee: 'Erika (10 un antes de abrir)',
+            morningRole: 'Embalar previamente Casa da Barbie, Farol Patrulha, Totokinhas, etc.',
+            afternoonAssignee: 'Erika (Dona do Pacote)',
+            afternoonRole: 'Repor brinquedos grandes embalados nos horários de menor fluxo',
+            howTo: 'Manter no mínimo 10 brinquedos volumosos já embrulhados com laço na retaguarda do pacote (Totokinhas, carrinhos grandes, Casa da Barbie), liberando entrega imediata.'
+          },
+          {
+            number: 20,
+            sector: 'MARKETING',
+            frequency: '3 a 5x / Semana',
+            title: 'Divulgação promocional no WhatsApp da Loja e Shopping',
+            morningAssignee: 'Maycon (Líder)',
+            morningRole: 'Planejar postagens Deskfy conforme o cronograma oficial',
+            afternoonAssignee: 'Luiz e Lidiane (Vendas)',
+            afternoonRole: 'Publicar ofertas no WhatsApp da loja nos horários de pico',
+            howTo: 'Utilizar exclusivamente artes oficiais homologadas na plataforma Deskfy. Destacar ofertas do dia, condições de pagamento e produtos com brindes.'
+          },
+          {
+            number: 21,
+            sector: 'MARKETING',
+            frequency: '100% do Tempo',
+            title: 'Operação contínua da rádio Musique no volume adequado',
+            morningAssignee: 'Rafa (Acionamento)',
+            morningRole: 'Ligar a plataforma Musique ao destrancar a loja no volume ideal',
+            afternoonAssignee: 'Caren e Maycon (Auditoria)',
+            afternoonRole: 'Verificar se a música ambiente continua ativa durante a tarde',
+            howTo: 'Acionar a plataforma Musique logo na abertura da loja. Manter volume sonoro equilibrado (nem inaudível, nem excessivo), mantendo o encanto sensorial da Ri Happy.'
+          }
+        ];
+
+        const sectorsList = ['OPERAÇÕES', 'DIGITAL', 'ESTOQUE', 'VM', 'CAIXA', 'PACOTE', 'MARKETING'];
+
+        // Colaborador Ativo Selecionado
+        const selectedCollab = computed(() => {
+          return allCollaboratorsList.find(c => c.name === selectedCollabName.value) || allCollaboratorsList[0];
+        });
+
+        // Tarefas do Colaborador Selecionado
+        const myTasks = computed(() => {
+          const name = selectedCollabName.value.toLowerCase();
+          return officialTasksList.filter(t => 
+            (t.morningAssignee && t.morningAssignee.toLowerCase().includes(name)) || 
+            (t.afternoonAssignee && t.afternoonAssignee.toLowerCase().includes(name))
+          );
+        });
+
+        const selectedCollabTasks = computed(() => myTasks.value);
+
+        const getTasksForCollaborator = (collabName) => {
+          if (!collabName) return [];
+          const name = collabName.toLowerCase();
+          return officialTasksList.filter(t => 
+            (t.morningAssignee && t.morningAssignee.toLowerCase().includes(name)) || 
+            (t.afternoonAssignee && t.afternoonAssignee.toLowerCase().includes(name))
+          );
+        };
+
+        const getRoleForCollabInTask = (collabName, task) => {
+          const name = collabName.toLowerCase();
+          const roles = [];
+          if (task.morningAssignee && task.morningAssignee.toLowerCase().includes(name)) {
+            roles.push(`Manhã: ${task.morningRole}`);
+          }
+          if (task.afternoonAssignee && task.afternoonAssignee.toLowerCase().includes(name)) {
+            roles.push(`Tarde: ${task.afternoonRole}`);
+          }
+          return roles.join(' • ') || 'Apoio geral na execução da tarefa';
+        };
+
+        const getMyRoleInTask = (task) => {
+          return getRoleForCollabInTask(selectedCollabName.value, task);
+        };
+
+        const toggleExpand = (taskNum) => {
+          expandedTasks.value[taskNum] = !expandedTasks.value[taskNum];
+        };
+
+        const isExpanded = (taskNum) => {
+          return !!expandedTasks.value[taskNum];
+        };
+
+        const toggleTask = (taskNum) => {
+          taskCompleted.value[taskNum] = !taskCompleted.value[taskNum];
+          // Salva no LocalStorage
+          try {
+            localStorage.setItem('sh_task_' + selectedCollabName.value + '_' + taskNum, taskCompleted.value[taskNum] ? '1' : '0');
+          } catch(e) {}
+        };
+
+        const completedCount = computed(() => {
+          return myTasks.value.filter(t => taskCompleted.value[t.number]).length;
+        });
+
+        const progressPercentage = computed(() => {
+          if (myTasks.value.length === 0) return 0;
+          return Math.round((completedCount.value / myTasks.value.length) * 100);
+        });
+
+        const selectCollab = (name) => {
+          selectedCollabName.value = name;
+          // Restaura estado do LocalStorage
+          myTasks.value.forEach(t => {
+            try {
+              const val = localStorage.getItem('sh_task_' + name + '_' + t.number);
+              taskCompleted.value[t.number] = (val === '1');
+            } catch(e) {}
+          });
+        };
+
+        const filteredSearchResults = computed(() => {
+          if (!searchQuery.value.trim()) return [];
+          const q = searchQuery.value.toLowerCase();
+          return officialTasksList.filter(t => 
+            t.title.toLowerCase().includes(q) ||
+            t.sector.toLowerCase().includes(q) ||
+            t.howTo.toLowerCase().includes(q) ||
+            t.morningAssignee.toLowerCase().includes(q) ||
+            t.afternoonAssignee.toLowerCase().includes(q)
+          );
+        });
+
+        const filteredAllTasks = computed(() => {
+          if (selectedSectorFilter.value === 'TODOS') return officialTasksList;
+          return officialTasksList.filter(t => t.sector === selectedSectorFilter.value);
+        });
+
+        // 9 Crachás
+        const crachasSheet1 = computed(() => allCollaboratorsList.slice(0, 9));
+        const crachasSheet2 = computed(() => allCollaboratorsList.slice(9));
+        const currentCrachasDisplay = computed(() => {
+          return selectedCrachaSheet.value === 1 ? crachasSheet1.value : crachasSheet2.value;
+        });
+
+        // Lista de colaboradores para a Frente do Crachá (com suporte a duplex espelhado)
+        const listFrenteCrachas = computed(() => {
+          if (!duplexMirrorMode.value) {
+            return allCollaboratorsList;
+          }
+          const mirrored = [];
+          for (let i = 0; i < allCollaboratorsList.length; i += 3) {
+            const row = allCollaboratorsList.slice(i, i + 3);
+            if (row.length === 3) {
+              mirrored.push(row[2], row[1], row[0]);
+            } else {
+              mirrored.push(...row.slice().reverse());
+            }
+          }
+          return mirrored;
+        });
+
+        // Retorna a URL pessoal que o QR Code deve apontar
+        const getCollabPersonalUrl = (c) => {
+          let base = qrBaseUrl.value.trim();
+          if (!base) {
+            if (typeof window !== 'undefined' && window.location && window.location.origin && window.location.origin !== 'null') {
+              base = window.location.origin + window.location.pathname;
+            } else {
+              base = './index.html';
+            }
+          }
+          const separator = base.includes('?') ? '&' : '?';
+          return `${base}${separator}colab=${encodeURIComponent(c.name)}&matricula=${encodeURIComponent(c.matricula)}`;
+        };
+
+        const useCurrentOriginUrl = () => {
+          if (typeof window !== 'undefined' && window.location && window.location.origin && window.location.origin !== 'null') {
+            qrBaseUrl.value = window.location.origin + window.location.pathname;
+          } else {
+            qrBaseUrl.value = 'https://supertatico.vercel.app/';
+          }
+          generateBarcodesAndQRCodes();
+        };
+
+        // Geração Dinâmica de Códigos de Barras e QR Codes
+        const generateBarcodesAndQRCodes = () => {
+          nextTick(() => {
+            listFrenteCrachas.value.forEach(c => {
+              // 1. Código de Barras (CODE128) da Matrícula para Scanner Arius
+              const barcodeEl = document.getElementById('barcode-' + c.name);
+              if (barcodeEl && window.JsBarcode) {
+                try {
+                  JsBarcode(barcodeEl, String(c.matricula).trim(), {
+                    format: "CODE128",
+                    width: 1.25,
+                    height: 26,
+                    displayValue: false,
+                    margin: 0
+                  });
+                } catch(e) {
+                  console.warn('Erro ao gerar código de barras:', c.name, e);
+                }
+              }
+
+              // 2. QR Code para Celular (Abre diretamente a Visão do Colaborador no Vercel)
+              const qrEl = document.getElementById('qrcode-' + c.name);
+              if (qrEl && window.QRCode) {
+                qrEl.innerHTML = '';
+                try {
+                  const finalUrl = getCollabPersonalUrl(c);
+                  new QRCode(qrEl, {
+                    text: finalUrl,
+                    width: 60,
+                    height: 60,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.M
+                  });
+                } catch(e) {
+                  console.warn('Erro ao gerar QR Code:', c.name, e);
+                }
+              }
+            });
+          });
+        };
+
+        // Classe dinâmica para a tag body durante impressão
+        const printBodyClass = computed(() => {
+          if (printMode.value === 'quadro_a4') return 'print-mode-quadro-a4';
+          if (printMode.value === 'card_individual') return 'print-mode-card-individual';
+          if (printMode.value === '9_cards') return 'print-mode-9-cards';
+          if (printMode.value === '12_cards_vertical') return 'print-mode-12-cards-vertical';
+          if (printMode.value === '12_frente') return 'print-mode-12-frente';
+          return '';
+        });
+
+        const setPrintPageOrientation = (orientation) => {
+          let styleEl = document.getElementById('print-orientation-style');
+          if (!styleEl) {
+            styleEl = document.createElement('style');
+            styleEl.id = 'print-orientation-style';
+            document.head.appendChild(styleEl);
+          }
+          if (orientation === 'landscape') {
+            styleEl.innerHTML = `@page { size: A4 landscape !important; margin: 3mm 6mm !important; }`;
+          } else {
+            styleEl.innerHTML = `@page { size: A4 portrait !important; margin: 4mm 5mm !important; }`;
+          }
+        };
+
+        // DISPARO FRENTE (12 CRACHÁS)
+        const print12FrenteSheet = () => {
+          setPrintPageOrientation('portrait');
+          currentMainMode.value = 'admin_print';
+          printTab.value = 'frente_crachas';
+          printMode.value = '12_frente';
+          generateBarcodesAndQRCodes();
+          
+          if (typeof document !== 'undefined' && document.body) {
+            document.body.classList.add('print-mode-12-frente');
+          }
+
+          setTimeout(() => {
+            window.print();
+            printMode.value = 'normal';
+            if (typeof document !== 'undefined' && document.body) {
+              document.body.classList.remove('print-mode-12-frente');
+            }
+          }, 300);
+        };
+
+        // DISPARO VERSO (12 CRACHÁS)
+        const print12CrachasSheet = () => {
+          setPrintPageOrientation('portrait');
+          currentMainMode.value = 'admin_print';
+          printTab.value = 'doze_cards';
+          printMode.value = '12_cards_vertical';
+          
+          if (typeof document !== 'undefined' && document.body) {
+            document.body.classList.add('print-mode-12-cards-vertical');
+          }
+
+          setTimeout(() => {
+            window.print();
+            printMode.value = 'normal';
+            if (typeof document !== 'undefined' && document.body) {
+              document.body.classList.remove('print-mode-12-cards-vertical');
+            }
+          }, 300);
+        };
+
+        // DISPARO QUADRO A4
+        const printQuadroA4Full = () => {
+          setPrintPageOrientation('portrait');
+          currentMainMode.value = 'admin_print';
+          printTab.value = 'quadro_a4';
+          printMode.value = 'quadro_a4';
+          
+          if (typeof document !== 'undefined' && document.body) {
+            document.body.classList.add('print-mode-quadro-a4');
+          }
+
+          setTimeout(() => {
+            window.print();
+            printMode.value = 'normal';
+            if (typeof document !== 'undefined' && document.body) {
+              document.body.classList.remove('print-mode-quadro-a4');
+            }
+          }, 200);
+        };
+
+        // DISPARO FICHA INDIVIDUAL
+        const printCurrentCardIndividual = () => {
+          setPrintPageOrientation('portrait');
+          currentMainMode.value = 'admin_print';
+          printTab.value = 'colaboradores';
+          printMode.value = 'card_individual';
+          
+          if (typeof document !== 'undefined' && document.body) {
+            document.body.classList.add('print-mode-card-individual');
+          }
+
+          setTimeout(() => {
+            window.print();
+            printMode.value = 'normal';
+            if (typeof document !== 'undefined' && document.body) {
+              document.body.classList.remove('print-mode-card-individual');
+            }
+          }, 200);
+        };
+
+        // DISPARO 9 CARDS
+        const printCrachasSheet = (sheetNum) => {
+          setPrintPageOrientation('portrait');
+          selectedCrachaSheet.value = sheetNum;
+          currentMainMode.value = 'admin_print';
+          printTab.value = 'nove_cards';
+          printMode.value = '9_cards';
+          
+          if (typeof document !== 'undefined' && document.body) {
+            document.body.classList.add('print-mode-9-cards');
+          }
+
+          setTimeout(() => {
+            window.print();
+            printMode.value = 'normal';
+            if (typeof document !== 'undefined' && document.body) {
+              document.body.classList.remove('print-mode-9-cards');
+            }
+          }, 200);
+        };
+
+        const getAvatarClass = (name) => {
+          switch(name) {
+            case 'Maycon': return 'bg-ri-orange';
+            case 'Aline': return 'bg-ri-blue';
+            case 'Erika': return 'bg-pink-600';
+            case 'Renata': return 'bg-amber-600';
+            case 'Luiz': return 'bg-indigo-600';
+            case 'Lidiane': return 'bg-purple-600';
+            case 'Bianca': return 'bg-teal-600';
+            case 'Thais': return 'bg-rose-600';
+            case 'Jheferson': return 'bg-emerald-700';
+            case 'Maria': return 'bg-cyan-700';
+            case 'Rafa': return 'bg-slate-700';
+            case 'Caren': return 'bg-red-800';
+            default: return 'bg-slate-700';
+          }
+        };
+
+        const getTurnoBadgeClass = (shift) => {
+          if (shift.includes('Manhã')) return 'bg-amber-500/20 text-amber-300 border border-amber-500/30';
+          if (shift.includes('Fechamento')) return 'bg-purple-500/20 text-purple-300 border border-purple-500/30';
+          if (shift.includes('Intermediário')) return 'bg-teal-500/20 text-teal-300 border border-teal-500/30';
+          return 'bg-ri-orange/20 text-orange-300 border border-ri-orange/30';
+        };
+
+        const getSectorHeaderClass = (sector) => {
+          switch(sector) {
+            case 'OPERAÇÕES': return 'bg-purple-500 text-white';
+            case 'DIGITAL': return 'bg-blue-600 text-white';
+            case 'ESTOQUE': return 'bg-amber-500 text-slate-950 font-bold';
+            case 'VM': return 'bg-pink-600 text-white';
+            case 'CAIXA': return 'bg-emerald-600 text-white';
+            case 'PACOTE': return 'bg-indigo-600 text-white';
+            case 'MARKETING': return 'bg-rose-600 text-white';
+            default: return 'bg-slate-700 text-white';
+          }
+        };
+
+        watch(currentMainMode, (newMode) => {
+          if (newMode === 'admin_print') {
+            generateBarcodesAndQRCodes();
+          }
+        });
+
+        watch(printTab, (newTab) => {
+          if (newTab === 'frente_crachas') {
+            generateBarcodesAndQRCodes();
+          }
+        });
+
+        onMounted(() => {
+          try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const colabParam = urlParams.get('colab') || urlParams.get('nome');
+            const matParam = urlParams.get('matricula');
+            const modeParam = urlParams.get('mode') || urlParams.get('aba');
+
+            if (colabParam) {
+              const found = allCollaboratorsList.find(c => c.name.toLowerCase() === colabParam.toLowerCase());
+              if (found) {
+                selectedCollabName.value = found.name;
+                currentMainMode.value = 'collaborator';
+              }
+            } else if (matParam) {
+              const found = allCollaboratorsList.find(c => c.matricula === matParam);
+              if (found) {
+                selectedCollabName.value = found.name;
+                currentMainMode.value = 'collaborator';
+              }
+            }
+
+            if (modeParam === 'print' || modeParam === 'admin') {
+              currentMainMode.value = 'admin_print';
+            }
+
+            // Inicializa a URL base se vazia
+            if (!qrBaseUrl.value) {
+              if (typeof window !== 'undefined' && window.location && window.location.origin && window.location.origin !== 'null' && !window.location.origin.startsWith('file')) {
+                qrBaseUrl.value = window.location.origin + window.location.pathname;
+              } else {
+                qrBaseUrl.value = '';
+              }
+            }
+
+            // Restaura checklist salvo no celular
+            myTasks.value.forEach(t => {
+              try {
+                const val = localStorage.getItem('sh_task_' + selectedCollabName.value + '_' + t.number);
+                taskCompleted.value[t.number] = (val === '1');
+              } catch(e) {}
+            });
+          } catch(e) {
+            console.warn('Erro ao processar inicialização:', e);
+          }
+
+          setTimeout(() => {
+            generateBarcodesAndQRCodes();
+          }, 400);
+        });
+
+        return {
+          currentMainMode,
+          mobileSubTab,
+          printTab,
+          printMode,
+          selectedCollabName,
+          selectedCollab,
+          myTasks,
+          selectedCollabTasks,
+          allCollaboratorsList,
+          officialTasksList,
+          sectorsList,
+          searchQuery,
+          selectedSectorFilter,
+          taskCompleted,
+          completedCount,
+          progressPercentage,
+          filteredSearchResults,
+          filteredAllTasks,
+          selectedCrachaSheet,
+          currentCrachasDisplay,
+          listFrenteCrachas,
+          qrBaseUrl,
+          hideArtOnPrint,
+          duplexMirrorMode,
+          printBodyClass,
+          selectCollab,
+          toggleExpand,
+          isExpanded,
+          toggleTask,
+          getRoleForCollabInTask,
+          getMyRoleInTask,
+          getTasksForCollaborator,
+          getAvatarClass,
+          getTurnoBadgeClass,
+          getSectorHeaderClass,
+          getCollabPersonalUrl,
+          useCurrentOriginUrl,
+          generateBarcodesAndQRCodes,
+          print12FrenteSheet,
+          print12CrachasSheet,
+          printQuadroA4Full,
+          printCurrentCardIndividual,
+          printCrachasSheet
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
