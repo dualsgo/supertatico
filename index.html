@@ -470,10 +470,10 @@
         </div>
       </section>
 
-      <!-- ================= ABA 4: EQUIPE (12 COLABORADORES) ================= -->
+      <!-- ================= ABA 4: EQUIPE (COLABORADORES) ================= -->
       <section v-else-if="activeTab === 'equipe'" class="space-y-4">
         <div>
-          <h2 class="brand-font text-base font-black text-white">ESCALA DOS 12 COLABORADORES</h2>
+          <h2 class="brand-font text-base font-black text-white">ESCALA DOS {{ allCollaboratorsList.length }} COLABORADORES</h2>
           <p class="text-[11px] text-slate-400">Toque em qualquer nome para ver as tarefas dele</p>
         </div>
 
@@ -633,7 +633,7 @@
           {
             name: 'Erika',
             fullName: 'ERIKA MONIQUE FONSECA DA CUNHA',
-            matricula: '10883',
+            matricula: '110883',
             role: 'Dona do Pacote & Insumos',
             shift: 'Manhã',
             schedule: '09:00 às 17:20',
@@ -719,6 +719,15 @@
             shift: 'Fechamento',
             schedule: '13:40 às 22:00',
             directive: 'Postura preventiva acolhedora no salão. Após a saída dos clientes, realizar a ronda noturna com 100% das luzes acesas (salas, forro, estoque e vestiários), checando trancas e desligamento do ar-condicionado.'
+          },
+          {
+            name: 'Alexandre',
+            fullName: 'ALEXANDRE (VENDEDOR ESPECIALISTA)',
+            matricula: '186119',
+            role: 'Vendedor Especialista & Atendimento ao Cliente',
+            shift: 'Intermediário',
+            schedule: '12:00 às 20:20',
+            directive: 'Atendimento consultivo, recepção acolhedora e conversão de vendas no salão. Atuar ativamente nos horários de maior fluxo, demonstrando brinquedos, tirando dúvidas de clientes e divulgando ofertas homologadas.'
           }
         ];
 
@@ -730,7 +739,7 @@
             title: 'Recepção e acolhimento na entrada da loja',
             morningAssignee: 'Renata (Vendas)',
             morningRole: 'Ficar a 2m da porta com bolhas de sabão, sorriso e sem postura de fiscal',
-            afternoonAssignee: 'Luiz, Lidiane e Caren',
+            afternoonAssignee: 'Luiz, Alexandre, Lidiane e Caren',
             afternoonRole: 'Revezamento de pico com acolhimento alegre e retaguarda preventiva de Caren',
             howTo: 'Posicione-se a aprox. 2 metros da entrada. Dê boas-vindas com sorriso contagiante, usando bolhas de sabão, malabares ou fantasias. Jamais cruze os braços ou adote postura de segurança/fiscal.'
           },
@@ -851,8 +860,8 @@
             title: 'Precificação correta em gôndolas, pilhas, pontas e cartazes',
             morningAssignee: 'Renata (Guardiã VM)',
             morningRole: 'Auditoria de abertura, troca de etiquetas e reimpressão de cartazes',
-            afternoonAssignee: 'Luiz e Bianca',
-            afternoonRole: 'Auditoria ativa com busca-preço móvel nas pontas de destaque',
+            afternoonAssignee: 'Luiz, Alexandre e Bianca',
+            afternoonRole: 'Auditoria ativa com busca-preço móvel nas pontas de destaque e apoio de vendas',
             howTo: 'Usar busca-preço portátil para auditar valores nas prateleiras. Reimprimir cartazes danificados. Nenhuma mercadoria pode estar exposta sem preço visível.'
           },
           {
@@ -862,8 +871,8 @@
             title: 'Ofertas e apostas do dia expostas com placas oficiais',
             morningAssignee: 'Renata (Vendas)',
             morningRole: 'Montar gôndolas de entrada conforme guia sazonal de ofertas',
-            afternoonAssignee: 'Luiz e Lidiane (Vendas)',
-            afternoonRole: 'Manter abastecimento e alinhamento visual das apostas no pico',
+            afternoonAssignee: 'Luiz, Alexandre e Lidiane (Vendas)',
+            afternoonRole: 'Manter abastecimento, atendimento ativo e conversão nas apostas do dia',
             howTo: 'Seguir o Guia de Exposição DDC 2026. Abastecer as gôndolas de entrada com as apostas principais de venda e placas promocionais oficiais.'
           },
           {
@@ -939,8 +948,8 @@
             title: 'Divulgação promocional no WhatsApp da Loja e Shopping',
             morningAssignee: 'Maycon (Líder)',
             morningRole: 'Planejar postagens Deskfy conforme o cronograma oficial',
-            afternoonAssignee: 'Luiz e Lidiane (Vendas)',
-            afternoonRole: 'Publicar ofertas no WhatsApp da loja nos horários de pico',
+            afternoonAssignee: 'Luiz, Alexandre e Lidiane (Vendas)',
+            afternoonRole: 'Publicar ofertas no WhatsApp da loja e atendimento a clientes no fluxo de pico',
             howTo: 'Utilizar exclusivamente artes oficiais homologadas na plataforma Deskfy. Destacar ofertas do dia, condições de pagamento e produtos com brindes.'
           },
           {
@@ -1053,6 +1062,7 @@
             case 'Maria': return 'bg-cyan-700';
             case 'Rafa': return 'bg-slate-700';
             case 'Caren': return 'bg-red-800';
+            case 'Alexandre': return 'bg-sky-600';
             default: return 'bg-slate-700';
           }
         };

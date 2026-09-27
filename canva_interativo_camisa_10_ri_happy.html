@@ -614,7 +614,7 @@
            ======================================================== -->
       <section v-if="activeTab === 'colaboradores'" class="space-y-4 section-cards-individual">
         
-        <!-- BARRA DE SELEÇÃO RÁPIDA DOS 12 COLABORADORES -->
+        <!-- BARRA DE SELEÇÃO RÁPIDA DOS COLABORADORES -->
         <div class="no-print bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm">
           <div class="flex items-center justify-between gap-2 mb-2.5">
             <div class="flex items-center gap-2">
@@ -805,7 +805,7 @@
                 </span>
               </div>
               <h3 class="brand-font font-black text-base sm:text-lg text-black leading-tight mt-1">
-                CRACHÁS OPERACIONAIS (12 COLABORADORES • PRETO E BRANCO)
+                CRACHÁS OPERACIONAIS (EQUIPE COMPLETA • PRETO E BRANCO)
               </h3>
               <p class="text-xs text-gray-700 font-medium mt-0.5">
                 Escolha o padrão desejado: <strong>Horizontal (8,5 × 5,2 cm)</strong> impresso em A4 Paisagem ou <strong>Vertical (5,2 × 7,0 cm)</strong> em grade 3×4 impresso em A4 Retrato. Títulos completos das tarefas sem reticências.
@@ -1550,7 +1550,7 @@
           {
             name: 'Erika',
             fullName: 'ERIKA MONIQUE FONSECA DA CUNHA',
-            matricula: '10883',
+            matricula: '110883',
             cpf: '111.067.347-77',
             admissao: '10/11/2016',
             role: 'Dona do Pacote & Insumos',
@@ -1656,6 +1656,17 @@
             shift: 'Fechamento',
             schedule: '13:40 às 22:00',
             directive: 'Postura preventiva acolhedora no salão. Após a saída dos clientes, realizar a ronda noturna com 100% das luzes acesas (salas, forro, estoque e vestiários), checando trancas e desligamento do ar-condicionado.'
+          },
+          {
+            name: 'Alexandre',
+            fullName: 'ALEXANDRE (VENDEDOR ESPECIALISTA)',
+            matricula: '186119',
+            cpf: 'Vendas & Atendimento',
+            admissao: '2026',
+            role: 'Vendedor Especialista & Atendimento ao Cliente',
+            shift: 'Intermediário',
+            schedule: '12:00 às 20:20',
+            directive: 'Atendimento consultivo, recepção acolhedora e conversão de vendas no salão. Atuar ativamente nos horários de maior fluxo, demonstrando brinquedos, tirando dúvidas de clientes e divulgando ofertas homologadas.'
           }
         ];
 
@@ -1668,7 +1679,7 @@
             title: 'Recepção e acolhimento na entrada da loja',
             morningAssignee: 'Renata (Vendas)',
             morningRole: 'Ficar a 2m da porta com bolhas de sabão, sorriso e sem postura de fiscal',
-            afternoonAssignee: 'Luiz, Lidiane e Caren',
+            afternoonAssignee: 'Luiz, Alexandre, Lidiane e Caren',
             afternoonRole: 'Revezamento de pico com acolhimento alegre e retaguarda preventiva de Caren',
             howTo: 'Posicione-se a aprox. 2 metros da entrada. Dê boas-vindas com sorriso contagiante, usando bolhas de sabão, malabares ou fantasias. Jamais cruze os braços ou adote postura de segurança/fiscal.'
           },
@@ -1789,8 +1800,8 @@
             title: 'Precificação correta em gôndolas, pilhas, pontas e cartazes',
             morningAssignee: 'Renata (Guardiã VM)',
             morningRole: 'Auditoria de abertura, troca de etiquetas e reimpressão de cartazes',
-            afternoonAssignee: 'Luiz e Bianca',
-            afternoonRole: 'Auditoria ativa com busca-preço móvel nas pontas de destaque',
+            afternoonAssignee: 'Luiz, Alexandre e Bianca',
+            afternoonRole: 'Auditoria ativa com busca-preço móvel nas pontas de destaque e apoio de vendas',
             howTo: 'Usar busca-preço portátil para auditar valores nas prateleiras. Reimprimir cartazes danificados. Nenhuma mercadoria pode estar exposta sem preço visível.'
           },
           {
@@ -1800,8 +1811,8 @@
             title: 'Ofertas e apostas do dia expostas com placas oficiais',
             morningAssignee: 'Renata (Vendas)',
             morningRole: 'Montar gôndolas de entrada conforme guia sazonal de ofertas',
-            afternoonAssignee: 'Luiz e Lidiane (Vendas)',
-            afternoonRole: 'Manter abastecimento e alinhamento visual das apostas no pico',
+            afternoonAssignee: 'Luiz, Alexandre e Lidiane (Vendas)',
+            afternoonRole: 'Manter abastecimento, atendimento ativo e conversão nas apostas do dia',
             howTo: 'Seguir o Guia de Exposição DDC 2026. Abastecer as gôndolas de entrada com as apostas principais de venda e placas promocionais oficiais.'
           },
           {
@@ -1877,8 +1888,8 @@
             title: 'Divulgação promocional no WhatsApp da Loja e Shopping',
             morningAssignee: 'Maycon (Líder)',
             morningRole: 'Planejar postagens Deskfy conforme o cronograma oficial',
-            afternoonAssignee: 'Luiz e Lidiane (Vendas)',
-            afternoonRole: 'Publicar ofertas no WhatsApp da loja nos horários de pico',
+            afternoonAssignee: 'Luiz, Alexandre e Lidiane (Vendas)',
+            afternoonRole: 'Publicar ofertas no WhatsApp da loja e atendimento a clientes no fluxo de pico',
             howTo: 'Utilizar exclusivamente artes oficiais homologadas na plataforma Deskfy. Destacar ofertas do dia, condições de pagamento e produtos com brindes.'
           },
           {
@@ -1958,6 +1969,7 @@
             case 'Maria': return 'bg-cyan-700';
             case 'Rafa': return 'bg-slate-800';
             case 'Caren': return 'bg-red-800';
+            case 'Alexandre': return 'bg-sky-600';
             default: return 'bg-slate-700';
           }
         };
@@ -2016,7 +2028,7 @@
         });
 
         const crachasSheet2 = computed(() => {
-          const remainingCollabs = allCollaboratorsList.slice(9, 12);
+          const remainingCollabs = allCollaboratorsList.slice(9);
           const supportCards = [
             {
               isProtocol: true,
@@ -2109,7 +2121,8 @@
               directive: 'Totokinha, Barbie e Farol Patrulha prontos. Oferecer rolinho para clientes com pressa.'
             }
           ];
-          return [...remainingCollabs, ...supportCards];
+          const neededSupportCards = Math.max(0, 9 - remainingCollabs.length);
+          return [...remainingCollabs, ...supportCards.slice(0, neededSupportCards)];
         });
 
         const currentCrachasDisplay = computed(() => {
